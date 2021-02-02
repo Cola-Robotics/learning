@@ -2,9 +2,6 @@
 # https://github.com/osrf/docker_images/blob/df19ab7d5993d3b78a908362cdcd1479a8e78b35/ros/noetic/ubuntu/focal/ros-base/Dockerfile
 FROM ros:noetic-ros-core-focal
 
-# Allows debconf to run properly. see https://stackoverflow.com/questions/51023312/docker-having-issues-installing-apt-utils
-ARG DEBIAN_FRONTEND=noninteractive
-
 # install bootstrap tools
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -18,6 +15,9 @@ RUN apt-get update && apt-get install -y \
 # bootstrap rosdep
 RUN rosdep init && \
   rosdep update --rosdistro $ROS_DISTRO
+
+# Allows debconf to run properly. see https://stackoverflow.com/questions/51023312/docker-having-issues-installing-apt-utils
+ARG DEBIAN_FRONTEND=noninteractive
 
 # install ros packages, setup environment
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -36,3 +36,10 @@ RUN apt-get update && apt-get install -y \
     tmux \
     python3 \
     pylint
+
+# Install commitizen (which requires npm, which requires Node.js)
+# see https://github.com/nodesource/distributions/blob/master/README.md
+# see https://www.npmjs.com/package/commitizen
+RUN curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs \
+    && npm install -g commitizen 
