@@ -34,6 +34,9 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc \
 # Setup color for PS1
 RUN echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
 
+# Fix GUI issues with docker
+ARG QT_GRAPHICSSYSTEM="native"
+
 # Install commitizen (which requires npm, which requires Node.js)
 # see https://github.com/nodesource/distributions/blob/master/README.md
 # see https://www.npmjs.com/package/commitizen
