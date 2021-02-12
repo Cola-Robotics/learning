@@ -58,8 +58,24 @@ TMUX is already installed in the container
 
 ~~~~~DOXYGEN~~~~~
 
-Doxygen is used do document our code.
-TODO Tom please add relevant info here
+Doxygen is used to document our code.
+
+To install Doxygen:
+run: sudo apt install doxygen
+
+To install rosdoc_lite (ROS package to make Doxygen documentation easier):
+run: sudo apt-get install ros-noetic-rosdoc-lite
+
+To add documentation to a ROS package:
+run: rosdoc_lite [package path]
+     (will generate /doc folder)
+
+To view documentation:
+run /doc/html/index.html in browser, e.g.: firefox ./doc/html/index.html
+
+(Note: access most info through "Files" drop-down on top of page)
+
+More info: http://wiki.ros.org/rosdoc_lite 
 
 
 ~~~~~JIRA~~~~~
