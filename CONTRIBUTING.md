@@ -13,6 +13,9 @@ $ sudo docker run --name cola-cont -v cola:/cola -it colaimage
 see https://docs.docker.com/storage/volumes/#start-a-container-with-a-volume
 for details
 
+If you encounter GUI issues within container, try adding "--net=host and --privileged" to docker run
+e.g. sudo docker run --name cola-cont -v cola:/cola -it --net=host --privileged colaimage
+
 To exit the container, run
 $ exit
 from within the container
